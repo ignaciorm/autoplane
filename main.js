@@ -1,8 +1,11 @@
-var h = 600;
-var w = 1500;
-var scl = 20;
+var h = 700;
+var w = 1920;
+var scl = 10;
 var cols;
 var terrain = [];
+var flyingspeed = 0.0; //intialized
+cols = w/scl;
+rows = h/scl;
 
 function setup(){
   console.log('this is the windowWidth: ' + windowWidth);
@@ -11,21 +14,20 @@ function setup(){
   stroke(80,210,80);
   strokeWeight(1);
 
-  cols = w/scl;
-  rows = h/scl;
-  var xof = 0;
-
-  for (var x = 0; x < cols+1; x++) {
-    terrain[x]= map(noise(xof),0,1,300,600);
-    console.log(xof);
-    console.log(noise(x));
-    xof += 0.05;
-  }
 }
 
 function draw() {
-
   background(70,70,140);
+
+  flyingspeed += 0.015;   //you can change flying speed here
+  var xof = flyingspeed;
+  for (var x = 0; x < cols+1; x++) {
+    terrain[x]= map(noise(xof),0,1,200,550);
+    console.log(xof);
+    console.log(noise(x));
+    xof += 0.025 ;
+  }
+
 
   beginShape(TRIANGLE_STRIP);
   for (var x = 0; x < cols+1; x++) {
